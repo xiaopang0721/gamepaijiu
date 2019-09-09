@@ -85,7 +85,7 @@ module gamepaijiu.page {
         }
     }
 
-    class ListRecordItem extends ui.game_ui.tongyong.JieSuanRender1UI {
+    class ListRecordItem extends ui.nqp.game_ui.tongyong.JieSuanRender1UI {
         private _game: Game;
         private _data: any;
         setData(game: Game, data: any) {

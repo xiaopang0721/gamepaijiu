@@ -13,11 +13,7 @@ module gamepaijiu.page {
 		static myinit(str: string) {
 			super.myinit(str);
 			PaijiuClip.init();
-			if (WebConfig.baseplatform == PageDef.BASE_PLATFORM_TYPE_NQP) {
-				PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU] = PaijiuPage;
-			} else {
-				PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU] = PaijiuPageOld;
-			}
+			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU] = PaijiuPage;
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_MAP] = PaijiuMapPage;
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_RULE] = PaijiuRulePage;
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_SETTLE] = PaijiuSettlePage;

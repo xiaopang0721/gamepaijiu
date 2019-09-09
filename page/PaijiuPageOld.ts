@@ -3,7 +3,7 @@
 */
 module gamepaijiu.page {
 	export class PaijiuPageOld extends game.gui.base.Page {
-		private _viewUI: ui.game_ui.paijiu.PaiJiu_HUDUI;
+		private _viewUI: ui.nqp.game_ui.paijiu.PaiJiu_HUDUI;
 		private _player: any;
 		private _playerInfo: any;
 		private _leastTmep: any = [1, 10, 50, 100];

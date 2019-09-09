@@ -72,7 +72,7 @@ module gamepaijiu.page {
     }
 
     export class PaijiuMapPage extends game.gui.base.Page {
-        private _viewUI: ui.game_ui.paijiu.PaiJiuUI;
+        private _viewUI: ui.nqp.game_ui.paijiu.PaiJiuUI;
         private _mapInfo: PaijiuMapInfo;
         private _paijiuMgr: PaijiuMgr;
         private _paijiuStory: PaijiuStory;

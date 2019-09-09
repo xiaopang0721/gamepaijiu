@@ -3,7 +3,7 @@
 */
 module gamepaijiu.page {
     export class PaijiuSettlePage extends game.gui.base.Page {
-        private _viewUI: ui.game_ui.paijiu.JieSuanUI;
+        private _viewUI: ui.nqp.game_ui.paijiu.JieSuanUI;
         private _paijiuMgr: PaijiuMgr;
         private _paijiuStory: PaijiuStory;
 

@@ -38,6 +38,15 @@ module gamepaijiu.page {
 				PathGameTongyong.atlas_game_ui_tongyong + "logo.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
 				Path_game_paijiu.atlas_game_ui + "paijiu/gupai.atlas",
+
+				Path_game_paijiu.ui_paijiu + "sk/paijiu_1.png",
+				Path_game_paijiu.ui_paijiu + "sk/paijiu_1.sk",
+				Path_game_paijiu.ui_paijiu + "sk/pajiu_0.png",
+				Path_game_paijiu.ui_paijiu + "sk/pajiu_0.sk",
+				Path_game_paijiu.ui_paijiu + "sk/pajiu_2.png",
+				Path_game_paijiu.ui_paijiu + "sk/pajiu_2.sk",
+				Path_game_paijiu.ui_paijiu + "sk/pajiu_3.png",
+				Path_game_paijiu.ui_paijiu + "sk/pajiu_3.sk",
 				Path.map + 'pz_paijiu.png',
 				Path.map_far + 'bg_paijiu.jpg'
 			]

@@ -99,6 +99,7 @@ module gamepaijiu.page {
             this._isNeedDuang = false;
             this._asset = [
                 PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
                 Path_game_paijiu.atlas_game_ui + "paijiu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",

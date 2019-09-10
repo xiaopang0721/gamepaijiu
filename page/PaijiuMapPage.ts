@@ -109,6 +109,10 @@ module gamepaijiu.page {
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/fapai_1.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/hulu.atlas",
                 Path_game_paijiu.atlas_game_ui + "paijiu/gupai.atlas",
+                Path_game_paijiu.ui_paijiu + "sk/paijiu_1.png",
+				Path_game_paijiu.ui_paijiu + "sk/pajiu_0.png",
+				Path_game_paijiu.ui_paijiu + "sk/pajiu_2.png",
+				Path_game_paijiu.ui_paijiu + "sk/pajiu_3.png",
             ];
         }
 

@@ -67,8 +67,8 @@ module gamepaijiu.page {
         bankerMusic: "dingzhuang.mp3",
         playDiceMusic: "yaotouzi.mp3",
         showCardMusic: "qzpj_playcard.mp3",
-        loseMusic: "tongyong/lose",
-        winMusic: "tongyong/win",
+        loseMusic: "lose",
+        winMusic: "win",
     }
 
     export class PaijiuMapPage extends game.gui.base.Page {

@@ -28,7 +28,7 @@ module gamepaijiu.page {
 				PathGameTongyong.atlas_game_ui_tongyong + "pai.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/shaizi.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/hulu.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/fapai_2.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/fapai_3.atlas",
 				Path.custom_atlas_scene + 'gupai.atlas',
 				PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "logo.atlas",

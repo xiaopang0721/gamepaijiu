@@ -110,9 +110,9 @@ module gamepaijiu.page {
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/hulu.atlas",
                 Path_game_paijiu.atlas_game_ui + "paijiu/gupai.atlas",
                 Path_game_paijiu.ui_paijiu + "sk/paijiu_1.png",
-				Path_game_paijiu.ui_paijiu + "sk/pajiu_0.png",
-				Path_game_paijiu.ui_paijiu + "sk/pajiu_2.png",
-				Path_game_paijiu.ui_paijiu + "sk/pajiu_3.png",
+                Path_game_paijiu.ui_paijiu + "sk/pajiu_0.png",
+                Path_game_paijiu.ui_paijiu + "sk/pajiu_2.png",
+                Path_game_paijiu.ui_paijiu + "sk/pajiu_3.png",
             ];
         }
 
@@ -170,6 +170,34 @@ module gamepaijiu.page {
             }
             for (let i = 0; i < 5; i++) {
                 this._viewUI["btn_banker" + i] && this._viewUI["btn_banker" + i].on(LEvent.CLICK, this, this.onBanker, [i]);
+            }
+
+            this.initBeiClip();
+        }
+
+        //倍数
+        private _beiClip1: ClipUtil;
+        private _beiClip2: ClipUtil;
+        private _beiClip3: ClipUtil;
+        private _beiClip4: ClipUtil;
+        private _beiClip5: ClipUtil;
+        initBeiClip(): void {
+            for (let i = 1; i < 6; i++) {
+                this["_beiClip" + i] = new ClipUtil(ClipUtil.BEI_FONT);
+                this["_beiClip" + i].centerX = this._viewUI["clip_bei" + i].centerX;
+                this["_beiClip" + i].centerY = this._viewUI["clip_bei" + i].centerY;
+                this._viewUI["clip_bei" + i].parent.addChild(this["_beiClip" + i]);
+                this._viewUI["clip_bei" + i].visible = false;
+            }
+        }
+
+        clearBeiClip(): void {
+            for (let i = 1; i < 6; i++) {
+                if (this["_beiClip" + i]) {
+                    this["_beiClip" + i].removeSelf();
+                    this["_beiClip" + i].destroy();
+                    this["_beiClip" + i] = null;
+                }
             }
         }
 
@@ -642,7 +670,8 @@ module gamepaijiu.page {
                 }
                 for (let i = 0; i < this._betPerTemp.length; i++) {
                     let index = i + 1;
-                    this._viewUI["btn_bet" + index].label = this._betPerTemp[i] + "倍";
+                    // this._viewUI["btn_bet" + index].label = this._betPerTemp[i] + "倍";
+                    this["_beiClip" + index].setText(this._betPerTemp[i], 0);
                 }
                 for (let k = this._betPerTemp.length + 1; k < 6; k++) {
                     this._viewUI["btn_bet" + k].visible = false;
@@ -828,6 +857,8 @@ module gamepaijiu.page {
         private updateBattledInfo(): void {
             let mainUnit = this._game.sceneObjectMgr.mainUnit;
             if (!mainUnit) return;
+            if (!this._mapInfo)
+                this._mapInfo = this._game.sceneObjectMgr.mapInfo;
             let battleInfoMgr = this._mapInfo.battleInfoMgr;
             let mainIdx = mainUnit.GetIndex();
             if (!mainIdx) return;
@@ -1239,6 +1270,7 @@ module gamepaijiu.page {
                 this._game.network.removeHanlder(Protocols.SMSG_OPERATION_FAILED, this, this.onOptHandler);
                 this._viewUI.view_touzi.ani1.off(LEvent.COMPLETE, this, this.showArrow);
 
+                this.clearBeiClip();
                 Laya.timer.clearAll(this);
                 Laya.Tween.clearAll(this);
                 if (this._paijiuMgr) {

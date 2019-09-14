@@ -195,8 +195,8 @@ module gamepaijiu.page {
             }
             for (let i = 0; i < 4; i++) {
                 this._viewUI["view_head" + i].visible = false;
-                this._viewUI["view_banker" + i].visible = false;
-                this._viewUI["view_banker" + i].ani1.gotoAndStop(val);
+                this._viewUI["view_head" + i].view_banker.visible = false;
+                this._viewUI["view_head" + i].view_banker.ani1.gotoAndStop(val);
                 this._viewUI["view_arrow" + i].visible = false;
                 this._viewUI["view_arrow" + i].ani1.stop();
                 if (i > 0) {
@@ -323,7 +323,7 @@ module gamepaijiu.page {
         private onUnitRemove(u: Unit) {
             this.onUpdateUnit();
             let posIdx = (u.GetIndex() - this._mainIdx + 4) % 4;
-            this._viewUI["view_banker" + posIdx].visible = false;
+            this._viewUI["view_head" + posIdx].view_banker.visible = false;
         }
 
         //精灵显示
@@ -565,12 +565,12 @@ module gamepaijiu.page {
                     let unit = this._game.sceneObjectMgr.getUnitByIdx(unitIdx)
                     if (unit) {
                         if (unit.GetIdentity() != 1) {
-                            this._viewUI["view_banker" + i].visible = false;
+                            this._viewUI["view_head" + i].view_banker.visible = false;
                         } else {
-                            this._viewUI["view_banker" + i].visible = true;
+                            this._viewUI["view_head" + i].view_banker.visible = true;
                         }
                     }
-                    this._viewUI["view_banker" + i].ani1.stop();
+                    this._viewUI["view_head" + i].view_banker.ani1.stop();
                 }
             }
             if (state == MAP_STATUS.MAP_STATE_BET) {
@@ -602,14 +602,14 @@ module gamepaijiu.page {
                             }
                         }
                     }
-                    this._viewUI["view_banker" + i].ani1.stop();
+                    this._viewUI["view_head" + i].view_banker.ani1.stop();
                 }
                 //随庄家的动画
                 for (let i = 0; i < this._bankerTemp.length; i++) {
                     let unit = this._game.sceneObjectMgr.getUnitByIdx(this._bankerTemp[i]);
                     let index = (this._bankerTemp[i] - mainUnit.GetIndex() + 4) % 4;
                     if (unit.GetIdentity() == 1) {
-                        this._viewUI["view_banker" + index].ani1.play(1, false);
+                        this._viewUI["view_head" + index].view_banker.ani1.play(1, false);
                         this._bankerIdx = this._bankerTemp[i];
                         this._game.playSound(Path_game_paijiu.music_paijiu + MUSIC_PATH.bankerMusic, false);
                         break;
@@ -771,9 +771,9 @@ module gamepaijiu.page {
             let posIdx = (idx - this._mainIdx + 4) % 4;
             for (let i = 0; i < 4; i++) {
                 if (i == posIdx) {
-                    this._viewUI["view_banker" + i].visible = true;
+                    this._viewUI["view_head" + i].view_banker.visible = true;
                 } else {
-                    this._viewUI["view_banker" + i].visible = false;
+                    this._viewUI["view_head" + i].view_banker.visible = false;
                 }
             }
             this._randCount++;
@@ -783,9 +783,9 @@ module gamepaijiu.page {
                     let index = (i - this._mainIdx + 4) % 4;
                     if (unit) {
                         if (unit.GetIdentity() == 1) {
-                            this._viewUI["view_banker" + index].visible = true;
+                            this._viewUI["view_head" + index].view_banker.visible = true;
                         } else {
-                            this._viewUI["view_banker" + index].visible = false;
+                            this._viewUI["view_head" + index].view_banker.visible = false;
                         }
                     }
 
@@ -1192,7 +1192,7 @@ module gamepaijiu.page {
             this._settleInfo = [];
             this._allType = [];
             for (let i = 0; i < 4; i++) {
-                this._viewUI["view_banker" + i].ani1.gotoAndStop(10);
+                this._viewUI["view_head" + i].view_banker.ani1.gotoAndStop(10);
             }
         }
 

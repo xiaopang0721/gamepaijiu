@@ -132,6 +132,7 @@ module gamepaijiu.page {
         // 页面打开时执行函数
         protected onOpen(): void {
             super.onOpen();
+            this.initBeiClip();
             this.updateViewUI();
             this.onUpdateUnitOffline();
             if (!this._paijiuMgr.isRelogin) {
@@ -172,7 +173,6 @@ module gamepaijiu.page {
                 this._viewUI["btn_banker" + i] && this._viewUI["btn_banker" + i].on(LEvent.CLICK, this, this.onBanker, [i]);
             }
 
-            this.initBeiClip();
         }
 
         //倍数

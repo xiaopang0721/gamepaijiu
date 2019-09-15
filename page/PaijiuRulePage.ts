@@ -51,16 +51,12 @@ module gamepaijiu.page {
 			this._viewUI.panel_daxiao.vScrollBarSkin = "";
 			this._viewUI.panel_daxiao.vScrollBar.autoHide = true;
 			this._viewUI.panel_daxiao.vScrollBar.elasticDistance = 100;
-
-			this._viewUI.panel_jiesuan.vScrollBarSkin = "";
-			this._viewUI.panel_jiesuan.vScrollBar.autoHide = true;
-			this._viewUI.panel_jiesuan.vScrollBar.elasticDistance = 100;
 		}
 
 		private selectHandler(index: number): void {
 			this._viewUI.panel_rule.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_WANFA_JIESHAO;
 			this._viewUI.panel_type.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_CARD_TYPE;
-			this._viewUI.panel_jiesuan.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_BEISHU;
+			this._viewUI.lab_jiesuan.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_BEISHU;
 			this._viewUI.panel_daxiao.visible = this._viewUI.btn_tab.selectedIndex == TYPE_INDEX.TYPE_DAXIAO;
 		}
 

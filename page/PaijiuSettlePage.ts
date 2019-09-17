@@ -12,7 +12,7 @@ module gamepaijiu.page {
             this._isNeedBlack = true;
             this._isClickBlack = true;
             this._asset = [
-                PathGameTongyong.atlas_game_ui_tongyong+ "general.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
             ];
         }
 
@@ -96,7 +96,7 @@ module gamepaijiu.page {
             this.lab_name.text = this._data.name;
             this.lab_point.text = this._data.point;
             this.lab_betmultiple.text = this._data.betmultiple;
-            this.lab_money.text = this._data.money;
+            this.lab_money.text = this._data.money ? this._data.money : "0";
             this.lab_bankermultiple.text = this._data.isbanker ? this._data.bankermultiple : "";
             this.lab_cardtype.text = this._data.cardtype;
             this.lab_name.color = this._data.isMain ? TeaStyle.COLOR_JIESUAN : TeaStyle.COLOR_WHITE;

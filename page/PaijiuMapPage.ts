@@ -1244,7 +1244,6 @@ module gamepaijiu.page {
             this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_UNIT_ACTION, this, this.onUpdateUnit);
             this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_MAPINFO_CHANGE, this, this.onUpdateMapInfo);
             this._game.sceneObjectMgr.off(SceneObjectMgr.EVENT_UNIT_QIFU_TIME_CHANGE, this, this.onUpdateUnit);
-            this._game.qifuMgr.off(QiFuMgr.QIFU_FLY, this, this.qifuFly);
             this._viewUI.view_touzi.ani1.off(LEvent.COMPLETE, this, this.showArrow);
             Laya.timer.clearAll(this);
             Laya.Tween.clearAll(this);

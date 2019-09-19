@@ -819,7 +819,7 @@ module gamepaijiu.page {
                     this._viewUI["view_head" + i].view_banker.visible = false;
                 }
             }
-            if (this._randCount >= 2000) {
+            if (this._randCount >= 10) {
                 for (let i = 1; i < 5; i++) {
                     let unit = this._game.sceneObjectMgr.getUnitByIdx(i)
                     let index = (i - this._mainIdx + 4) % 4;
@@ -834,7 +834,7 @@ module gamepaijiu.page {
                 }
                 Laya.timer.clear(this, this.randBanker);
             }
-            this._randCount += this._diff_ran;
+            this._randCount++;
             if (this._bankerTemp.length > 1) {
                 this._game.playSound(Path_game_paijiu.music_paijiu + MUSIC_PATH.randBankerMusic, false);
             }

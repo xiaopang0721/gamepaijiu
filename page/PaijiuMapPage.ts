@@ -390,7 +390,6 @@ module gamepaijiu.page {
                     }
                     let name = getMainPlayerName(unit.GetName());
                     this._viewUI["view_head" + index].text_name.text = name;
-                    this._viewUI["view_head" + index].img_head.skin = PathGameTongyong.ui_tongyong_touxiang + "head_" + unit.GetHeadImg() + ".png";
                     if (this._curStatus != MAP_STATUS.MAP_STATE_SETTLE || this._paijiuMgr.isRelogin) {
                         this.updateMoney();
                     }
@@ -422,6 +421,7 @@ module gamepaijiu.page {
                         }
                     } else {
                         this._viewUI["view_head" + index].img_qifu.visible = false;
+                        this._viewUI["view_head" + index].img_head.skin = PathGameTongyong.ui_tongyong_touxiang + "head_" + unit.GetHeadImg() + ".png";
                     }
                 }
             }

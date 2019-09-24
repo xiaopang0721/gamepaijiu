@@ -231,9 +231,9 @@ module gamepaijiu.page {
             this._viewUI.box_cards.visible = false;
             this._viewUI.box_betnum.visible = false;
             this._viewUI.btn_cards.visible = false;
-            let val: number = 10;   //抢庄动画
+            let val: number = 13;   //抢庄动画
             if (this._paijiuMgr.isRelogin) {
-                val = 15;
+                val = 28;
             }
             for (let i = 0; i < 4; i++) {
                 this._viewUI["view_head" + i].visible = false;

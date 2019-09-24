@@ -423,7 +423,7 @@ module gamepaijiu.page {
                         }
                     } else {
                         this._viewUI["view_head" + index].img_qifu.visible = false;
-                        this._viewUI["view_head" + index].img_head.skin = PathGameTongyong.ui_tongyong_touxiang + "head_" + unit.GetHeadImg() + ".png";
+                        this._viewUI["view_head" + index].img_icon.skin = PathGameTongyong.ui_tongyong_touxiang + "head_" + unit.GetHeadImg() + ".png";
                     }
                 }
             }

@@ -391,12 +391,15 @@ module gamepaijiu.page {
                         this._bankerIdx = posIdx;
                     }
                     let name = getMainPlayerName(unit.GetName());
-                    viewHead.txt_name.text = name;                    
+                    viewHead.txt_name.text = name;
                     if (this._curStatus != MAP_STATUS.MAP_STATE_SETTLE || this._paijiuMgr.isRelogin) {
                         this.updateMoney();
                     }
                     //头像框
                     viewHead.img_txk.skin = TongyongUtil.getTouXiangKuangUrl(unit.GetHeadKuangImg());
+                    //vip
+                    viewHead.img_vip.visible = unit.GetVipLevel() > 0;
+                    viewHead.img_vip.skin = TongyongUtil.getVipUrl(unit.GetVipLevel());
                     //祈福成功 头像上就有动画
                     if (qifu_index && posIdx == qifu_index) {
                         viewHead.qifu_type.visible = true;
@@ -515,6 +518,8 @@ module gamepaijiu.page {
                     this._viewUI.view_head0.img_qifu.visible = TongyongUtil.getIsHaveQiFu(mPlayer, this._game.sync.serverTimeBys);
                     //头像框
                     this._viewUI.view_head0.img_txk.skin = TongyongUtil.getTouXiangKuangUrl(mPlayer.GetHeadKuangImg());
+                    this._viewUI.view_head0.img_vip.visible = mPlayer.playerInfo.vip_level > 0;
+                    this._viewUI.view_head0.img_vip.skin = TongyongUtil.getVipUrl(mPlayer.playerInfo.vip_level);
                 } else {
                     money = unitOffline.GetMoney();
                     this._viewUI.view_head0.txt_name.text = getMainPlayerName(unitOffline.GetName());

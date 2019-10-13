@@ -36,7 +36,6 @@ module gamepaijiu.page {
 			this.addChild(this._viewUI);
 			this._game.playMusic(Path.music + "paijiu/qzpj_bgm.mp3");
 			this._paijiuMgr = new PaijiuMgr(this._game);
-			this._viewUI.box_fangka.visible = false;
 
 			for (let index = 0; index < this._viewUI.box_right.numChildren; index++) {
 				this._viewUI.box_right._childs[index].visible = false;

@@ -416,10 +416,11 @@ module gamepaijiu.page {
                                 viewHead.img_qifu.visible = true;
                                 viewHead.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg());
                             })
-                        } else {
-                            viewHead.img_qifu.visible = true;
-                            viewHead.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg());
-                        }
+                        } 
+                        // else {
+                        //     viewHead.img_qifu.visible = true;
+                        //     viewHead.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg());
+                        // }
                     } else {
                         viewHead.img_qifu.visible = false;
                         viewHead.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg());

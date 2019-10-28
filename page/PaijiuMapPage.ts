@@ -104,6 +104,7 @@ module gamepaijiu.page {
                 PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "pai.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "qz.atlas",
                 DatingPath.atlas_dating_ui + "qifu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/shaizi.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "general/effect/fapai_1.atlas",
@@ -240,7 +241,6 @@ module gamepaijiu.page {
                 this._viewUI["view_head" + i].img_banker.visible = false;
                 this._viewUI["view_head" + i].img_banker.ani1.gotoAndStop(val);
                 this._viewUI["view_arrow" + i].visible = false;
-                this._viewUI["view_arrow" + i].ani1.stop();
                 if (i > 0) {
                     this._viewUI["view_player" + i].box_betnum.visible = false;
                     this._viewUI["view_player" + i].view_type.visible = false;

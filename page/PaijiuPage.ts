@@ -64,7 +64,7 @@ module gamepaijiu.page {
 			super.onOpen();
 
 			this.initPlayerInfo();
-			(this._viewUI.view_hud as TongyongHudNqpPage).onOpen(this._game, PaijiuPageDef.GAME_NAME);
+			(this._viewUI.view_hud as TongyongHudNqpPage).onOpen(this._game, PaijiuPageDef.GAME_NAME, false);
 			for (let index = 0; index < this._viewUI.box_right.numChildren; index++) {
 				this._viewUI.box_right._childs[index].visible = true;
 				Laya.Tween.from(this._viewUI.box_right._childs[index], {
@@ -117,14 +117,14 @@ module gamepaijiu.page {
 					}
 					this._game.sceneObjectMgr.intoStory(PaijiuPageDef.GAME_NAME, Web_operation_fields.GAME_ROOM_CONFIG_PAIJIU_4.toString());
 					break;
-				case this._viewUI.btn_join:
-					let maplv = TongyongUtil.getJoinMapLv(PaijiuPageDef.GAME_NAME, this._playerInfo.money);
-					if (!maplv) {
-						this.showTipsBox(this._leastTmep[0]);
-						return;
-					}
-					this._game.sceneObjectMgr.intoStory(PaijiuPageDef.GAME_NAME, maplv.toString());
-					break;
+				// case this._viewUI.btn_join:
+				// 	let maplv = TongyongUtil.getJoinMapLv(PaijiuPageDef.GAME_NAME, this._playerInfo.money);
+				// 	if (!maplv) {
+				// 		this.showTipsBox(this._leastTmep[0]);
+				// 		return;
+				// 	}
+				// 	this._game.sceneObjectMgr.intoStory(PaijiuPageDef.GAME_NAME, maplv.toString());
+				// 	break;
 				default:
 					break;
 			}

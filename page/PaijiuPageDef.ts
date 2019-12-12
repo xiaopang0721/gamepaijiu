@@ -21,6 +21,7 @@ module gamepaijiu.page {
 
 
 			this["__needLoadAsset"] = [
+				DatingPath.atlas_dating_ui + "qifu.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
 				Path_game_paijiu.atlas_game_ui + "paijiu.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
@@ -33,7 +34,7 @@ module gamepaijiu.page {
 				Path.custom_atlas_scene + 'gupai.atlas',
 				PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "logo.atlas",
-				DatingPath.atlas_dating_ui + "qifu.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
 				Path_game_paijiu.atlas_game_ui + "paijiu/gupai.atlas",
 
 				Path_game_paijiu.ui_paijiu + "sk/paijiu_1.png",

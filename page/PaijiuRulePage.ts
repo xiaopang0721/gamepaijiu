@@ -9,7 +9,7 @@ module gamepaijiu.page {
 		TYPE_BEISHU = 3,
 	}
 	export class PaijiuRulePage extends game.gui.base.Page {
-		private _viewUI: ui.nqp.game_ui.paijiu.PaiJiu_GuiZeUI;
+		private _viewUI: ui.ajqp.game_ui.paijiu.PaiJiu_GuiZeUI;
 
 		constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
 			super(v, onOpenFunc, onCloseFunc);

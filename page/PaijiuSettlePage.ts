@@ -3,9 +3,11 @@
 */
 module gamepaijiu.page {
     export class PaijiuSettlePage extends game.gui.base.Page {
-        private _viewUI: ui.nqp.game_ui.paijiu.JieSuanUI;
+        private _viewUI: ui.ajqp.game_ui.paijiu.JieSuanUI;
         private _paijiuMgr: PaijiuMgr;
         private _paijiuStory: PaijiuStory;
+        private _isGameOver: boolean = false;  //是否结束
+        private _isEarlyOver: boolean = false;  //是否提前结束
 
         constructor(v: Game, onOpenFunc?: Function, onCloseFunc?: Function) {
             super(v, onOpenFunc, onCloseFunc);
@@ -33,8 +35,9 @@ module gamepaijiu.page {
             this._viewUI.list_settle.renderHandler = new Handler(this, this.renderHandler);
 
             this._viewUI.list_settle.dataSource = this.dataSource[3];
-            this._endTime = this.dataSource[2];
-            this._viewUI.lab_xinxi.visible = this.dataSource[0];
+            this._isGameOver = this.dataSource[0] + 1 == 2;//本轮局数已满
+            this._isEarlyOver = this.dataSource[1];//提前结束
+            this._endTime = this._isGameOver || this._isEarlyOver ? this._game.sync.serverTimeBys + 6 : this._game.sync.serverTimeBys + 4;
             this._viewUI.btn_continue.visible = false;
             // if (this.dataSource[1]) {
             //     this._viewUI.btn_continue.visible = true;
@@ -67,14 +70,19 @@ module gamepaijiu.page {
         deltaUpdate(): void {
             if (!this._viewUI) return;
             let curTime = this._game.sync.serverTimeBys;
-            let time = Math.floor(this._endTime - curTime) + 1;
+            let time = Math.floor(this._endTime - curTime);
             if (time > 0) {
-                let str = this.dataSource[1] ? "有玩家余额不足，本轮游戏结束" : time + "S后开始第2局，本轮共2局";
+                let str = "";
+                if (this._isGameOver) {
+                    str = "本轮2局游戏已经结束，" + time + "s后关闭界面";
+                } else if (this._isEarlyOver) {
+                    str = "有玩家余额不足，本轮游戏结束，" + time + "s后关闭界面";
+                } else {
+                    str = time + "s后开始第2局，本轮共2局";
+                }
                 this._viewUI.lab_xinxi.text = str;
             } else {
-                if (!this._viewUI.btn_continue.visible) {
-                    this.close();
-                }
+                this.close();
             }
         }
 

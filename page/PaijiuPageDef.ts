@@ -4,11 +4,20 @@
 module gamepaijiu.page {
 	export class PaijiuPageDef extends game.gui.page.PageDef {
 		static GAME_NAME: string;
-		//21点界面
-		static PAGE_PAIJIU: string = "1";			//HUD界面
-		static PAGE_PAIJIU_MAP: string = "2";		//房间地图
-		static PAGE_PAIJIU_RULE: string = "101";		//规则界面
-		static PAGE_PAIJIU_SETTLE: string = "8";	//结算界面
+		//21点HUD界面
+		static PAGE_PAIJIU: string = "1";
+		//21点游戏界面
+		static PAGE_PAIJIU_MAP: string = "2";
+		//21点结算界面
+		static PAGE_PAIJIU_SETTLE: string = "3";
+		//21点你赢了界面
+		static PAGE_PAIJIU_WIN: string = "4";
+		//21点通杀界面
+		static PAGE_PAIJIU_TONGSHA: string = "5";
+		//21点通赔界面
+		static PAGE_PAIJIU_TONGPEI: string = "6";
+		//21点规则界面
+		static PAGE_PAIJIU_RULE: string = "101";
 
 		static myinit(str: string) {
 			super.myinit(str);
@@ -16,31 +25,37 @@ module gamepaijiu.page {
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU] = PaijiuPage;
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_MAP] = PaijiuMapPage;
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_RULE] = PaijiuRulePage;
+			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_WIN] = PaijiuWinPage;
+			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_TONGSHA] = PaijiuTongShaPage;
+			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_TONGPEI] = PaijiuTongPeiPage;
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_SETTLE] = PaijiuSettlePage;
-
-
 
 			this["__needLoadAsset"] = [
 				DatingPath.atlas_dating_ui + "qifu.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
 				Path_game_paijiu.atlas_game_ui + "paijiu.atlas",
+				Path_game_paijiu.atlas_game_ui + "paijiu/gupai.atlas",
+				Path_game_paijiu.atlas_game_ui_paijiu_effect + "nyl.atlas",
+				Path_game_paijiu.atlas_game_ui_paijiu_effect + "qp.atlas",
+				Path_game_paijiu.atlas_game_ui_paijiu_effect + "yanhua.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "pai.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "qz.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/shaizi.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/hulu.atlas",
-				PathGameTongyong.atlas_game_ui_tongyong + "general/effect/fapai_3.atlas",
-				Path.custom_atlas_scene + 'gupai.atlas',
 				PathGameTongyong.atlas_game_ui_tongyong + "dating.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "logo.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
-				Path_game_paijiu.atlas_game_ui + "paijiu/gupai.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "js.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "nyl.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "zjts.atlas",
+				PathGameTongyong.atlas_game_ui_tongyong + "zjtp.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong_general + "anniu.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong_general_effect + "anniug.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong_general_effect + "shaizi.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong_general_effect + "fapai_1.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong_general_effect + "hulu.atlas",
 
-				Path_game_paijiu.ui_paijiu + "sk/paijiu_1.png",
-				Path_game_paijiu.ui_paijiu + "sk/pajiu_0.png",
-				Path_game_paijiu.ui_paijiu + "sk/pajiu_2.png",
-				Path_game_paijiu.ui_paijiu + "sk/pajiu_3.png",
+				Path.custom_atlas_scene + 'gupai.atlas',
 				Path.map + 'pz_paijiu.png',
 				Path.map_far + 'bg_paijiu.jpg'
 			]
@@ -54,6 +69,7 @@ module gamepaijiu.page {
 					Path_game_paijiu.music_paijiu + "qzpj_playcard.mp3",
 					Path_game_paijiu.music_paijiu + "suijizhuangjia.mp3",
 					Path_game_paijiu.music_paijiu + "yaotouzi.mp3",
+					Path_game_paijiu.music_paijiu + "zjtongchi.mp3",
 				])
 			}
 		}

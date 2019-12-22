@@ -380,7 +380,7 @@ module gamepaijiu.manager {
 		fapai() {
 			let count = 1;
 			for (let i = 0; i < this._cards.length / 2; i++) {
-				Laya.timer.once(300 * count, this, () => {
+				Laya.timer.once(250 * count, this, () => {
 					for (let k = 0; k < 2; k++) {
 						let card = this._cards[i * 2 + k];
 						//播音效

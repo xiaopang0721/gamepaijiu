@@ -3,7 +3,7 @@
 */
 module gamepaijiu.data {
 	export class PaijiuData extends gamecomponent.object.PlayingGuPai {
-		private _posTemp = [[610, 580, 70], [1030, 360, 70], [610, 100, 70], [180, 360, 70]];
+		private _posTemp = [[563, 588, 70], [1030, 360, 70], [625, 125, 70], [180, 360, 70]];
 		private _mainPlayerIndex: number;
 		public _ownerIdx;	//牌的归属座位
 

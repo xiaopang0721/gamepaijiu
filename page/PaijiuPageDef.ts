@@ -10,12 +10,6 @@ module gamepaijiu.page {
 		static PAGE_PAIJIU_MAP: string = "2";
 		//21点结算界面
 		static PAGE_PAIJIU_SETTLE: string = "3";
-		//21点你赢了界面
-		static PAGE_PAIJIU_WIN: string = "4";
-		//21点通杀界面
-		static PAGE_PAIJIU_TONGSHA: string = "5";
-		//21点通赔界面
-		static PAGE_PAIJIU_TONGPEI: string = "6";
 		//21点规则界面
 		static PAGE_PAIJIU_RULE: string = "101";
 
@@ -25,9 +19,6 @@ module gamepaijiu.page {
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU] = PaijiuPage;
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_MAP] = PaijiuMapPage;
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_RULE] = PaijiuRulePage;
-			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_WIN] = PaijiuWinPage;
-			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_TONGSHA] = PaijiuTongShaPage;
-			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_TONGPEI] = PaijiuTongPeiPage;
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_SETTLE] = PaijiuSettlePage;
 
 			this["__needLoadAsset"] = [

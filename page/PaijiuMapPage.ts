@@ -257,6 +257,7 @@ module gamepaijiu.page {
             this._viewUI.box_cards.visible = false;
             this._viewUI.ani_first.visible = false;
             this._viewUI.btn_cards.visible = false;
+            this._viewUI.box_tips.visible = false;
             for (let i = 0; i < 4; i++) {
                 this._viewUI["view_head" + i].visible = false;
                 this._viewUI["view_head" + i].effWin.visible = false;
@@ -371,6 +372,8 @@ module gamepaijiu.page {
             //下注按钮的倍数
             let val = index;
             this._game.network.call_qzpaijiu_banker(val);
+            this._viewUI.box_tips.visible = true;
+            this._viewUI.txt_tips.text = "请等待其他玩家抢庄";
         }
 
         //选择下注倍数
@@ -381,6 +384,8 @@ module gamepaijiu.page {
             //下注按钮的倍数
             let val = this._betPerTemp[index - 1];
             this._game.network.call_qzpaijiu_bet(val);
+            this._viewUI.box_tips.visible = true;
+            this._viewUI.txt_tips.text = "请等待其他玩家下注";
         }
 
         //继续游戏
@@ -458,21 +463,20 @@ module gamepaijiu.page {
                         viewHead.qifu_type.skin = this._qifuTypeImgUrl;
                         this.playTween(viewHead.qifu_type, qifu_index);
                     }
-                    //时间戳变化 才加上祈福标志
-                    if (TongyongUtil.getIsHaveQiFu(unit, this._game.sync.serverTimeBys)) {
-                        if (qifu_index && posIdx == qifu_index) {
-                            Laya.timer.once(2500, this, () => {
-                                viewHead.img_qifu.visible = true;
-                                viewHead.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg());
-                            })
-                        }
-                        // else {
-                        //     viewHead.img_qifu.visible = true;
-                        //     viewHead.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg());
-                        // }
-                    } else {
-                        viewHead.img_qifu.visible = false;
-                        viewHead.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg());
+                    //祈福成功 头像上就有动画
+                    if (qifu_index && posIdx == qifu_index) {
+                        viewHead.qifu_type.visible = true;
+                        viewHead.qifu_type.skin = this._qifuTypeImgUrl;
+                        //时间戳变化 才加上祈福标志
+                        this.playTween(viewHead.qifu_type, qifu_index);
+                        Laya.timer.once(2500, this, () => {
+                            viewHead.img_qifu.visible = true;
+                            viewHead.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
+                        })
+                    }
+                    else {
+                        viewHead.img_qifu.visible = TongyongUtil.getIsHaveQiFu(unit, this._game.sync.serverTimeBys);
+                        viewHead.img_icon.skin = TongyongUtil.getHeadUrl(unit.GetHeadImg(), 2);
                     }
                 }
             }
@@ -613,6 +617,7 @@ module gamepaijiu.page {
             }
             this._viewUI.text_roomtype.text = str + ChipConfig[this._paijiuStory.mapLv][0];
             this._viewUI.btn_cards.visible = true;
+            this._viewUI.box_tips.visible = state == MAP_STATUS.MAP_STATE_BET || state == MAP_STATUS.MAP_STATE_BANKER;
             this.showOtherCards();
             if (state == MAP_STATUS.MAP_STATE_BANKER) {
                 this._pageHandle.pushClose({ id: PaijiuPageDef.PAGE_PAIJIU_SETTLE, parent: this._game.uiRoot.HUD });
@@ -620,6 +625,7 @@ module gamepaijiu.page {
                     this._viewUI["view_think" + i].visible = true;
                     this._viewUI["view_think" + i].ani1.play(0, true);
                 }
+                this._viewUI.txt_tips.text = "请选择抢庄倍数";
                 this._viewUI.box_banker.visible = true;
                 let money = mainUnit.GetMoney();
                 let maxVal = Math.floor(money / (ChipConfig[this._paijiuStory.mapLv][0] * 30))
@@ -652,6 +658,7 @@ module gamepaijiu.page {
                     this._viewUI["view_think" + i].visible = i != bankerPos;
                     this._viewUI["view_think" + i].ani1.play(0, true);
                 }
+                this._viewUI.txt_tips.text = mainUnit.GetIdentity() == 1 ? "请等待其他玩家下注" : "请选择下注倍数";
                 //是庄家，就不显示下注了
                 this._viewUI.box_bet.visible = mainUnit.GetIdentity() != 1;
                 //下注按钮的倍数显示
@@ -699,16 +706,16 @@ module gamepaijiu.page {
                 });
                 Laya.timer.once(2000, this, () => {
                     if (this._settleWinInfo.length <= 0) {//庄家通杀
-                        this._game.playSound(Path_game_ebgang.music_ebgang + "zjtongchi.mp3", false);
-                        this._pageHandle.pushOpen({ id: PaijiuPageDef.PAGE_PAIJIU_TONGSHA, parent: this._game.uiRoot.HUD });
+                        this._game.playSound(Path_game_paijiu.music_paijiu + "zjtongchi.mp3", false);
+                        this._pageHandle.pushOpen({ id: TongyongPageDef.PAGE_TONGYONG_ZJTS, parent: this._game.uiRoot.HUD });
                     } else if (this._settleLoseInfo.length <= 0) {//庄家通赔
-                        // this._game.playSound(Path_game_ebgang.music_ebgang + "zjtongpei.mp3", false);Z
-                        this._pageHandle.pushOpen({ id: PaijiuPageDef.PAGE_PAIJIU_TONGPEI, parent: this._game.uiRoot.HUD });
+                        // this._game.playSound(Path_game_paijiu.music_paijiu + "zjtongpei.mp3", false);Z
+                        this._pageHandle.pushOpen({ id: TongyongPageDef.PAGE_TONGYONG_ZJTP, parent: this._game.uiRoot.HUD });
                     } else {
                         if (this._moneyChange >= 0) {
                             let rand = MathU.randomRange(1, 3);
                             this._game.playSound(StringU.substitute(PathGameTongyong.music_tongyong + "win{0}.mp3", rand), true);
-                            this._pageHandle.pushOpen({ id: PaijiuPageDef.PAGE_PAIJIU_WIN, parent: this._game.uiRoot.HUD });
+                            this._pageHandle.pushOpen({ id: TongyongPageDef.PAGE_TONGYONG_GAMEWIN, parent: this._game.uiRoot.HUD });
                         }
                     }
                     this._pageHandle.updatePageHandle();//更新额外界面的开关状态
@@ -717,7 +724,7 @@ module gamepaijiu.page {
                 if (this._settleWinInfo.length <= 0 || this._settleLoseInfo.length <= 0) { //庄家通杀或通赔后
                     Laya.timer.once(3500, this, () => {
                         if (this._moneyChange >= 0) { //再播你赢了
-                            this._pageHandle.pushOpen({ id: PaijiuPageDef.PAGE_PAIJIU_WIN, parent: this._game.uiRoot.HUD });
+                            this._pageHandle.pushOpen({ id: TongyongPageDef.PAGE_TONGYONG_GAMEWIN, parent: this._game.uiRoot.HUD });
                             let musicType = MathU.randomRange(1, 3);
                             this._game.playSound(PathGameTongyong.music_tongyong + MUSIC_PATH.winMusic + musicType + ".mp3", true);
                         } else { //再播你输了
@@ -730,7 +737,7 @@ module gamepaijiu.page {
                 }
             }
             if (state == MAP_STATUS.MAP_STATE_WAIT) {
-                this._pageHandle.pushClose({ id: PaijiuPageDef.PAGE_PAIJIU_WIN, parent: this._game.uiRoot.HUD });
+                this._pageHandle.pushClose({ id: TongyongPageDef.PAGE_TONGYONG_GAMEWIN, parent: this._game.uiRoot.HUD });
                 //传数据，打开结算界面
                 this.operSettlePage();
                 this.clearClip();
@@ -886,6 +893,9 @@ module gamepaijiu.page {
                             this._viewUI["view_head" + index].img_banker.visible = true;
                             this._viewUI["view_head" + index].img_banker.ani1.play(0, false);
                             this._game.playSound(Path_game_paijiu.music_paijiu + MUSIC_PATH.bankerMusic, false);
+                            if (this._viewUI["box_opt" + index].box_buqiang.visible) {
+                                this.setBankerNum(this._viewUI["box_opt" + index], 1);
+                            }
                         } else {
                             this._viewUI["view_head" + index].img_banker.visible = false;
                             //清除非庄家的抢庄气泡                    
@@ -1095,13 +1105,18 @@ module gamepaijiu.page {
         }
 
         //设置抢庄倍数
-        private setBankerNum(view: any, val: number): void {
+        private setBankerNum(view: any, val: number, isplay: boolean = true): void {
+            val = this._curStatus == MAP_STATUS.MAP_STATE_BANKER ? val : 1;
             view.visible = true;
             view.box_bet.visible = false;
             view.box_qiang.visible = val > 0;
             view.box_buqiang.visible = !view.box_qiang.visible;
-            view.ani1.play(0, false);
             view.banker_clip.index = val;
+            if (isplay && this._curStatus <= MAP_STATUS.MAP_STATE_BANKER_PLAY) {
+                view.ani1.play(0, false);
+            } else {
+                view.ani1.gotoAndStop(27);
+            }
         }
 
         //设置下注倍数
@@ -1111,7 +1126,6 @@ module gamepaijiu.page {
             view.box_bet.visible = true;
             view.box_qiang.visible = false;
             view.box_buqiang.visible = false;
-            view.ani1.play(0, false);
             let clip_money = new PaijiuClip(PaijiuClip.BEI_CLIP_FONT);
             clip_money.setText(Math.abs(val), true);
             clip_money.scale(0.85, 0.85);
@@ -1120,6 +1134,11 @@ module gamepaijiu.page {
             view.bet_clip.parent.addChild(clip_money);
             this._clipList.push(clip_money);
             view.bet_clip.visible = false;
+            if (this._curStatus == MAP_STATUS.MAP_STATE_BET) {
+                view.ani1.play(0, false);
+            } else {
+                view.ani1.gotoAndStop(27);
+            }
         }
 
         private showFirst(): void {
@@ -1280,7 +1299,6 @@ module gamepaijiu.page {
 
         //重置数据
         private resetData(): void {
-            // this._battleIndex = -1;
             this._paijiuMgr && (this._paijiuMgr.isRelogin = false);
             this._paijiuStory && (this._paijiuStory.checkReconect = false);
             this._bankerTemp = [];
@@ -1326,7 +1344,12 @@ module gamepaijiu.page {
                 this._viewUI.btn_record.off(LEvent.CLICK, this, this.onBtnClickWithTween);
                 this._viewUI.btn_chongzhi.off(LEvent.CLICK, this, this.onBtnClickWithTween);
                 this._viewUI.btn_cards.off(LEvent.CLICK, this, this.onBtnClickWithTween);
-
+                for (let i = 1; i < 6; i++) {
+                    this._viewUI["btn_bet" + i] && this._viewUI["btn_bet" + i].off(LEvent.CLICK, this, this.onBet);
+                }
+                for (let i = 0; i < 5; i++) {
+                    this._viewUI["btn_banker" + i] && this._viewUI["btn_banker" + i].off(LEvent.CLICK, this, this.onBanker);
+                }
                 this._game.sceneObjectMgr.off(PaijiuMapInfo.EVENT_PG_STATUS_CHECK, this, this.onUpdateMapState);
                 this._game.sceneObjectMgr.off(PaijiuMapInfo.EVENT_PG_BATTLE_CHECK, this, this.updateBattledInfo);
                 this._game.sceneObjectMgr.off(PaijiuMapInfo.EVENT_PG_COUNT_DOWN, this, this.updateCountDown);//倒计时更新

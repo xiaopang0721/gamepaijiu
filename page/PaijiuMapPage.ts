@@ -89,7 +89,7 @@ module gamepaijiu.page {
         private _settleLoseInfo: any = [];  //结算信息，闲家输
         private _betPerTemp: any = [];  //下注倍数配置
         private _bankerMoneyChange: number; //庄家结算金币
-        private _bankerRate: number = 0; //抢庄倍数
+        private _bankerPer: number = 0; //抢庄倍数
         private _betTemps: any = [];    //各个精灵下注倍数
         private _settleInfo: any = [];  //所有结算信息
         private _allType: any = [];     //所有人的牌型
@@ -190,12 +190,12 @@ module gamepaijiu.page {
                 //全面屏
                 if (this._game.isFullScreen) {
                     this._viewUI.box_top_left.left = 14 + 56;
-                    this._viewUI.box_room_left.left = 105 + 56;
+                    this._viewUI.box_room_left.left = 115 + 56;
                     this._viewUI.box_top_right.right = 28 + 56;
                     this._viewUI.box_bottom_right.right = 12 + 56;
                 } else {
                     this._viewUI.box_top_left.left = 14;
-                    this._viewUI.box_room_left.left = 105;
+                    this._viewUI.box_room_left.left = 115;
                     this._viewUI.box_top_right.right = 28;
                     this._viewUI.box_bottom_right.right = 12;
                 }
@@ -542,7 +542,7 @@ module gamepaijiu.page {
                 let posIdx = (idx + index) % max == 0 ? 4 : (idx + index) % max;
                 let unit = this._game.sceneObjectMgr.getUnitByIdx(posIdx);
                 if (unit) {
-                    let money = EnumToString.getPointBackNum(unit.GetMoney(), 2);
+                    let money = EnumToString.getPointBackNum(TongyongUtil.getMoneyChange(unit.GetMoney()), 2);
                     this._viewUI["view_head" + index].txt_money.text = money;
                 }
             }
@@ -598,7 +598,7 @@ module gamepaijiu.page {
                     this._viewUI.view_head0.img_vip.visible = mPlayer.playerInfo.vip_level > 0;
                     this._viewUI.view_head0.img_vip.skin = TongyongUtil.getVipUrl(mPlayer.playerInfo.vip_level);
                 } else {
-                    money = unitOffline.GetMoney();
+                    money = TongyongUtil.getMoneyChange(unitOffline.GetMoney());
                     this._viewUI.view_head0.txt_name.text = getMainPlayerName(unitOffline.GetName());
                     this._viewUI.view_head0.img_icon.skin = TongyongUtil.getHeadUrl(unitOffline.GetHeadImg());
                     this._viewUI.view_head0.img_qifu.visible = TongyongUtil.getIsHaveQiFu(unitOffline, this._game.sync.serverTimeBys);
@@ -647,7 +647,7 @@ module gamepaijiu.page {
                 }
                 this._viewUI.txt_tips.text = "请选择抢庄倍数";
                 this._viewUI.box_banker.visible = true;
-                let money = mainUnit.GetMoney();
+                let money = TongyongUtil.getMoneyChange(mainUnit.GetMoney());
                 let maxVal = Math.floor(money / (ChipConfig[this._paijiuStory.mapLv][0] * 30))
                 maxVal = maxVal > 4 ? 4 : maxVal;
                 for (let i = 0; i < 5; i++) {
@@ -683,10 +683,10 @@ module gamepaijiu.page {
                 this._viewUI.box_bet.visible = mainUnit.GetIdentity() != 1;
                 //下注按钮的倍数显示
                 let banker = this._game.sceneObjectMgr.getUnitByIdx(this._bankerIdx);
-                let bankerMoney = banker.GetMoney();
-                let bankePer = Math.floor(bankerMoney / (3 * ChipConfig[this._paijiuStory.mapLv][0]));
-                let selfMoney = mainUnit.GetMoney();
-                let xianPer = Math.floor(selfMoney / this._bankerRate);
+                let bankerMoney = TongyongUtil.getMoneyChange(banker.GetMoney());
+                let bankePer = Math.floor(bankerMoney / (3 * ChipConfig[this._paijiuStory.mapLv][0] * this._bankerPer));
+                let selfMoney = TongyongUtil.getMoneyChange(mainUnit.GetMoney());
+                let xianPer = Math.floor(selfMoney / (ChipConfig[this._paijiuStory.mapLv][0] * this._bankerPer));
                 let betPer = bankePer > xianPer ? xianPer : bankePer;
                 if (betPer > 30) {
                     betPer = 30;
@@ -801,7 +801,7 @@ module gamepaijiu.page {
             for (let i = 1; i < 5; i++) {
                 let unit = this._game.sceneObjectMgr.getUnitByIdx(i);
                 if (unit) {
-                    if (unit.GetMoney() < ChipConfig[this._paijiuStory.mapLv][1]) {
+                    if (TongyongUtil.getMoneyChange(unit.GetMoney()) < ChipConfig[this._paijiuStory.mapLv][1]) {
                         flag = true;
                         break;
                     }
@@ -845,7 +845,7 @@ module gamepaijiu.page {
                         name: unit.GetName(),
                         point: ChipConfig[this._paijiuStory.mapLv][0],
                         betmultiple: betNum ? betNum : "",
-                        bankermultiple: this._bankerRate,
+                        bankermultiple: this._bankerPer,
                         money: money,
                         cardtype: cardType,
                     }
@@ -991,11 +991,11 @@ module gamepaijiu.page {
                                     this._viewUI["view_think" + posIdx].ani1.stop();
                                 }
                             }
-                            if (rate > this._bankerRate) {
-                                this._bankerRate = rate;
+                            if (rate > this._bankerPer) {
+                                this._bankerPer = rate;
                                 this._bankerTemp = [];
                                 this._bankerTemp.push(idx);
-                            } else if (rate == this._bankerRate) {
+                            } else if (rate == this._bankerPer) {
                                 this._bankerTemp.push(idx);
                             }
                         }
@@ -1362,7 +1362,7 @@ module gamepaijiu.page {
             for (let i = 1; i < 6; i++) {
                 this._viewUI["btn_bet" + i].visible = true;
             }
-            this._bankerRate = 0;
+            this._bankerPer = 0;
             this._betTemps = [];
             this._settleInfo = [];
             this._allType = [];

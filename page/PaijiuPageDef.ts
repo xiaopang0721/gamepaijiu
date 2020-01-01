@@ -27,7 +27,6 @@ module gamepaijiu.page {
 				Path_game_paijiu.atlas_game_ui + "paijiu/gupai.atlas",
 				Path_game_paijiu.atlas_game_ui_paijiu_effect + "nyl.atlas",
 				Path_game_paijiu.atlas_game_ui_paijiu_effect + "qp.atlas",
-				Path_game_paijiu.atlas_game_ui_paijiu_effect + "yanhua.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "hud.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "general.atlas",
 				PathGameTongyong.atlas_game_ui_tongyong + "touxiang.atlas",

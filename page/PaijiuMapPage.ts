@@ -114,12 +114,14 @@ module gamepaijiu.page {
                 PathGameTongyong.atlas_game_ui_tongyong + "qifu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "js.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "nyl.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong + "yq.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong + "chongzhi.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong_general + "anniu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong_general_effect + "shaizi.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong_general_effect + "fapai_1.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong_general_effect + "hulu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong_general_effect + "skz.atlas",
+                PathGameTongyong.atlas_game_ui_tongyong_general + "icon_money.png",
             ];
         }
 

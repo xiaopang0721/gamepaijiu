@@ -121,7 +121,7 @@ module gamepaijiu.page {
                 PathGameTongyong.atlas_game_ui_tongyong_general_effect + "fapai_1.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong_general_effect + "hulu.atlas",
                 PathGameTongyong.atlas_game_ui_tongyong_general_effect + "skz.atlas",
-                PathGameTongyong.atlas_game_ui_tongyong_general + "icon_money.png",
+                PathGameTongyong.ui_tongyong_general + "icon_money.png",
             ];
         }
 

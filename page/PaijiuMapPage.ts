@@ -100,7 +100,6 @@ module gamepaijiu.page {
             super(v, onOpenFunc, onCloseFunc);
             this._isNeedDuang = false;
             this._asset = [
-                DatingPath.atlas_dating_ui + "qifu.atlas",
                 Path_game_paijiu.atlas_game_ui + "paijiu.atlas",
                 Path_game_paijiu.atlas_game_ui + "paijiu/gupai.atlas",
                 Path_game_paijiu.atlas_game_ui_paijiu_effect + "nyl.atlas",
@@ -674,6 +673,8 @@ module gamepaijiu.page {
                 }
             }
             if (state == MAP_STATUS.MAP_STATE_BET) {
+                this._kuang.removeSelf();
+                Laya.timer.clear(this, this.randBanker);
                 let bankerPos = (this._bankerIdx - this._mainIdx + 4) % 4;
                 for (let i: number = 1; i < 4; i++) {
                     this._viewUI["view_think" + i].visible = i != bankerPos;

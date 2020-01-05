@@ -22,7 +22,6 @@ module gamepaijiu.page {
 			PageDef._pageClassMap[PaijiuPageDef.PAGE_PAIJIU_SETTLE] = PaijiuSettlePage;
 
 			this["__needLoadAsset"] = [
-				DatingPath.atlas_dating_ui + "qifu.atlas",
 				Path_game_paijiu.atlas_game_ui + "paijiu.atlas",
 				Path_game_paijiu.atlas_game_ui + "paijiu/gupai.atlas",
 				Path_game_paijiu.atlas_game_ui_paijiu_effect + "nyl.atlas",
